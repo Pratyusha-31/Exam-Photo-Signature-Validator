@@ -1,39 +1,21 @@
-Exam Photo & Signature Validator:
-
---------------------------------------------------------------------
+# Exam Photo & Signature Validator
 
 ## Project Specifications
 
-The application allows users to select a competitive examination such as UPSC, RRB Group D, SBI PO/Clerk, JEE, and GATE.
+The application processes user-uploaded images for competitive examination applications by performing **automatic resizing and compression** based on the selected exam requirements.
 
-Users can upload their photograph and signature from both desktop and mobile devices.
-
-The system validates uploaded images according to official examination specifications, including:
-
-Background colour
-
-File size
-
-Image format
-
-Image dimensions
-
-If the uploaded image does not meet the required specifications, a popup message is displayed and the download option is disabled.
-
-If the image is valid, it is automatically resized and processed to generate an exam-ready downloadable image.
-
-The application performs all processing without using a database.
-
----------------------------------------------------------------------
+* The user selects a specific competitive examination (such as UPSC, RRB Group D, SBI PO/Clerk, JEE, GATE, etc.).
+* The user uploads a photograph or signature image in any common image format.
+* The application does **not reject images based on background, format, or dimensions at input time**.
+* The system automatically resizes and compresses the uploaded image according to the predefined specifications of the selected examination.
+* The processed output is returned as an **exam-ready image** that meets file size and dimension requirements.
+* The entire image processing workflow is handled locally without using any database.
 
 ## Scope of the Project
 
-The project focuses only on photograph and signature validation for online examination applications.
-
-It supports multiple competitive examinations with different image requirements.
-
-The application is designed to work on both desktop and mobile platforms.
-
-The project does not include user authentication, database storage, or online form submission.
-
-The scope can be extended in the future to support additional examinations and enhanced validation features.
+* The project focuses only on **image resizing and compression** for photographs and signatures used in online examination applications.
+* It supports multiple competitive examinations, each with different image size and dimension constraints.
+* The application works independently of image source quality by converting user-provided images into compliant outputs.
+* No database is used for storing user data or images.
+* The project does not include user authentication, backend storage, or online application submission.
+* The scope can be extended in the future to include additional exams, advanced image quality checks, or deployment as a web/mobile application.
