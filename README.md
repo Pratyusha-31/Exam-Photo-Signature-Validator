@@ -19,3 +19,25 @@ The application processes user-uploaded images for competitive examination appli
 * No database is used for storing user data or images.
 * The project does not include user authentication, backend storage, or online application submission.
 * The scope can be extended in the future to include additional exams, advanced image quality checks, or deployment as a web/mobile application.
+
+## How to Run Locally
+
+### 1. Install dependencies
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 2. Run the Flask app
+
+```bash
+python app.py
+```
+
+### 3. Open in browser
+
+Open your browser and go to:
+
+```
+http://127.0.0.1:5000
+```

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Photo & Signature Validator</title>
+    <style>
+        :root {
+            --bg: #f3f4f6;
+            --card: #ffffff;
+            --accent: #1f2937;
+            --accent-soft: #e5e7eb;
+            --primary: #0f766e;
+            --primary-dark: #0a4f4a;
+            --danger: #b91c1c;
+            --success: #15803d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            color: var(--accent);
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            margin: 0 0 8px 0;
+            font-size: 32px;
+            letter-spacing: 0.5px;
+        }
+
+        .header p {
+            margin: 0;
+            color: #4b5563;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin: 0 0 12px 0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        select, input[type="file"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--accent-soft);
+            border-radius: 10px;
+            background: #f9fafb;
+            font-size: 14px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .message {
+            padding: 12px 14px;
+            border-radius: 10px;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background: #ecfdf3;
+            color: var(--success);
+            border: 1px solid #bbf7d0;
+        }
+
+        .message.error {
+            background: #fef2f2;
+            color: var(--danger);
+            border: 1px solid #fecaca;
+        }
+
+        .download-box {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 12px;
+            background: #f8fafc;
+            border: 1px dashed #cbd5f5;
+        }
+
+        .download-actions {
+            margin-top: 12px;
+        }
+
+        .suggest-box {
+            margin-top: 16px;
+            padding: 14px;
+            border-radius: 12px;
+            background: #eef2ff;
+            border: 1px solid #c7d2fe;
+        }
+
+        @media (max-width: 700px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <h1>Exam Photo & Signature Validator</h1>
+            <p>Upload your image and get it resized to official exam requirements.</p>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Upload Image</h2>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="exam">Select Exam</label>
+                        <select id="exam" name="exam" required>
+                            <option value="" disabled {% if not exam %}selected{% endif %}>Choose Exam</option>
+                            <option value="UPSC" {% if exam == "UPSC" %}selected{% endif %}>UPSC</option>
+                            <option value="GATE" {% if exam == "GATE" %}selected{% endif %}>GATE</option>
+                            <option value="GROUP-D" {% if exam == "GROUP-D" %}selected{% endif %}>GROUP-D</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="img_type">Select Type</label>
+                        <select id="img_type" name="img_type" required>
+                            <option value="" disabled {% if not img_type %}selected{% endif %}>Photo / Signature</option>
+                            <option value="Photo" {% if img_type == "Photo" %}selected{% endif %}>Photo</option>
+                            <option value="Signature" {% if img_type == "Signature" %}selected{% endif %}>Signature</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="file">Upload JPG/JPEG Image</label>
+                    <input id="file" type="file" name="file" accept=".jpg,.jpeg" required />
+                </div>
+
+                <div style="margin-top: 16px;">
+                    <button class="btn btn-primary" type="submit">Process</button>
+                </div>
+            </form>
+
+            {% if error_msg %}
+            <div class="message error">{{ error_msg }}</div>
+            {% endif %}
+
+            {% if success_msg %}
+            <div class="message success">{{ success_msg }}</div>
+            {% endif %}
+
+            {% if download_filename %}
+            <div class="download-box">
+                <strong>Processed file is ready.</strong>
+                <div class="download-actions">
+                    <a class="btn btn-outline" href="/download/{{ download_filename }}">Download</a>
+                </div>
+
+                {% if suggest_signature %}
+                <div class="suggest-box">
+                    <div>Photo processed successfully. Would you like to continue with Signature for the same exam?</div>
+                    <div style="margin-top: 10px;">
+                        <button class="btn btn-primary" type="button" onclick="continueWithSignature()">Continue with Signature</button>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function continueWithSignature() {
+            var examSelect = document.getElementById("exam");
+            var typeSelect = document.getElementById("img_type");
+            if (examSelect && typeSelect) {
+                typeSelect.value = "Signature";
+                examSelect.focus();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                document.getElementById("file").focus();
+            }
+        }
+    </script>
+</body>
+</html>
