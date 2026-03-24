@@ -1,43 +1,180 @@
 # Exam Photo & Signature Validator
 
-## Project Specifications
+<p align="center">
+  <img src="static/favicon.svg" alt="Logo" width="80" height="80">
+</p>
 
-The application processes user-uploaded images for competitive examination applications by performing **automatic resizing and compression** based on the selected exam requirements.
+<p align="center">
+  A modern web application that automatically resizes and compresses exam photos and signatures to meet official government portal requirements.
+</p>
 
-* The user selects a specific competitive examination (such as UPSC, RRB Group D, SBI PO/Clerk, JEE, GATE, etc.).
-* The user uploads a photograph or signature image in any common image format.
-* The application does **not reject images based on background, format, or dimensions at input time**.
-* The system automatically resizes and compresses the uploaded image according to the predefined specifications of the selected examination.
-* The processed output is returned as an **exam-ready image** that meets file size and dimension requirements.
-* The entire image processing workflow is handled locally without using any database.
+<p align="center">
+  <img src="https://img.shields.io/github/license/Pratyusha-31/Exam-Photo-Signature-Validator?style=flat-square" alt="License">
+  <img src="https://img.shields.io/github/stars/Pratyusha-31/Exam-Photo-Signature-Validator?style=flat-square" alt="Stars">
+  <img src="https://img.shields.io/github/issues/Pratyusha-31/Exam-Photo-Signature-Validator?style=flat-square" alt="Issues">
+</p>
 
-## Scope of the Project
+---
 
-* The project focuses only on **image resizing and compression** for photographs and signatures used in online examination applications.
-* It supports multiple competitive examinations, each with different image size and dimension constraints.
-* The application works independently of image source quality by converting user-provided images into compliant outputs.
-* No database is used for storing user data or images.
-* The project does not include user authentication, backend storage, or online application submission.
-* The scope can be extended in the future to include additional exams, advanced image quality checks, or deployment as a web/mobile application.
+## Features
 
-## How to Run Locally
+- **Smart Resize** - Automatically adjusts image dimensions to exact specifications
+- **File Optimization** - Compresses or pads images to meet file size requirements
+- **Multiple Exams** - Supports UPSC, GATE, and GROUP-D requirements
+- **Drag & Drop** - Easy file upload with preview
+- **Instant Processing** - Get your processed image in seconds
+- **100% Private** - No data stored or transmitted anywhere
+- **Responsive Design** - Works on mobile, tablet, and desktop
 
-### 1. Install dependencies
+---
 
-```bash
-python -m pip install -r requirements.txt
+## Supported Exams
+
+| Exam | Photo Size | Signature Size | File Size Range |
+|------|------------|----------------|-----------------|
+| **UPSC** | 200 x 230 px | 140 x 60 px | 20 - 300 KB |
+| **GATE** | 200 x 230 px | 150 x 80 px | 10 - 200 KB |
+| **GROUP-D** | 200 x 230 px | 140 x 60 px | 20 - 100 KB |
+
+---
+
+## Screenshots
+
+> Add screenshots to the `static/images/screenshots/` folder and update the paths below.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│    📷 Exam Photo & Signature Validator                      │
+│                                                             │
+│    ┌─────────────────────────────────────────────────┐     │
+│    │                                                 │     │
+│    │         [Drag & Drop Upload Area]               │     │
+│    │                                                 │     │
+│    └─────────────────────────────────────────────────┘     │
+│                                                             │
+│    [UPSC ▼]  [Photo ▼]  [Process Image Button]             │
+│                                                             │
+│    ✓ Image Processed Successfully!                          │
+│    [Download Image]                                        │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### 2. Run the Flask app
+---
+
+## Quick Start
+
+### Prerequisites
+
+- Python 3.8 or higher
+- pip (Python package manager)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Pratyusha-31/Exam-Photo-Signature-Validator.git
+cd Exam-Photo-Signature-Validator
+
+# Create virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the application
+python app.py
+```
+
+### Open in Browser
+
+Navigate to: [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+---
+
+## Usage
+
+1. **Select your exam** from the dropdown (UPSC, GATE, or GROUP-D)
+2. **Choose image type** (Photo or Signature)
+3. **Upload your image** by dragging and dropping or clicking to browse
+4. **Click "Process Image"** to resize and compress
+5. **Download** your processed image ready for upload
+
+---
+
+## Project Structure
+
+```
+Exam-Photo-Signature-Validator/
+├── app.py                      # Flask application
+├── image_processor.py           # Image processing logic
+├── templates/
+│   └── index.html               # HTML template
+├── static/
+│   ├── css/
+│   │   └── style.css           # Styles
+│   ├── js/
+│   │   └── main.js             # JavaScript
+│   ├── favicon.svg              # Favicon
+│   └── images/                  # Images directory
+├── uploads/                     # Temporary uploads
+├── requirements.txt             # Dependencies
+├── README.md                   # Documentation
+├── LICENSE                     # MIT License
+└── .gitignore                  # Git ignore
+```
+
+---
+
+## Tech Stack
+
+- **Backend**: Flask (Python)
+- **Image Processing**: Pillow (PIL)
+- **Frontend**: Vanilla HTML, CSS, JavaScript
+- **Design**: Custom responsive CSS
+
+---
+
+## Development
+
+### Run in Debug Mode
 
 ```bash
 python app.py
 ```
 
-### 3. Open in browser
+### Production Deployment
 
-Open your browser and go to:
+For production, use Gunicorn:
 
+```bash
+pip install gunicorn
+gunicorn -w 4 -b 0.0.0.0:8000 app:app
 ```
-http://127.0.0.1:5000
-```
+
+---
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<p align="center">
+  Made with ❤️ for exam aspirants
+</p>

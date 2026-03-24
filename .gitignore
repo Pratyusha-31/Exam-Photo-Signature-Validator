@@ -1,31 +1,62 @@
-# Python
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*.pyo
+*$py.class
 *.pyd
-.Python
+
+# C extensions
 *.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Environments
+.env
+.env.local
+.flaskenv
 
 # Virtual environments
 .venv/
 venv/
 env/
+ENV/
 
-# Flask
-instance/
-.env
-.flaskenv
-
-# IDE/editor
+# IDE/Editor
 .vscode/
 .idea/
-
-# OS files
+*.swp
+*.swo
+*~
 .DS_Store
 Thumbs.db
-*.Zone.Identifier
 
-# App uploads/outputs
+# App specific
 uploads/
 static/processed_images/
+*.log
 
+# Temporary files
+*.tmp
+*.temp
